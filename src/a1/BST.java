@@ -7,10 +7,10 @@ public interface BST {
 	public boolean member(int blt);
 
 
-	//(add t elt) → finite-set
-	// t : finite-set
+	//t.add(elt) -> FiniteSet
+	// t : FiniteSet
 	// elt : integer
-	public FiniteSet add(FiniteSet t, int elt);
+	public FiniteSet add(int elt);
 	
 }
 
