@@ -18,32 +18,41 @@ public class FiniteSet implements BST {
 
 	// FiniteSet should implement all the functions in BST
 
-//---FUNCTION CONTRACT-----------------------------------------------------
-	// empty() -> FiniteSet
-	// empty() should return a FiniteSet with "empty" for left, right
-	public BST empty() {
-		//Note on constructor: It seems OK to use Leaf() for left/right because 
-		//Leaf implements BST
-			return new Leaf();
-		}
-	
-	//cardinality(set) -> int
-	//set : FiniteSet
+	// set.cardinality() -> int
+	// set : FiniteSet
 	public int cardinality() {
-		//Count 1 for self,
-		//add the cardinality of the left and right BST's
+		// Count 1 for self,
+		// add the cardinality of the left and right BST's
 		return 1 + this.left.cardinality() + this.right.cardinality();
-	 }
-	
-	// emptyhuh(set) -> boolean
-	// set : BST
-	public boolean emptyhuh() {
-		if ( this.left == new Leaf() ) {
-			return true;
-		} if ( this.right == new Leaf() ) {
-			return true;
-		} else
-		return false; 
 	}
+
+	// set.isEmptyHuh() -> boolean
+	// set : BST
+	public boolean isEmptyHuh() {
+		return this.cardinality() < 0;
+	}
+
 	
+	// member(t blt) -> boolean
+	// t : FiniteSet
+	// blt : integer
+	//Difficult to match spec because the input should 
+	//be able to be any subclasses of BST— including Leaf.
+	public boolean member(int blt) {
+		if (this.key == blt) {
+			return true;
+		} 
+		//left and right need to be instance variables
+		//of type BST in order for finite set to hold
+		//a Leaf at the bottom...
+		//What if this.left/right is a Leaf???
+		//Implement member for Leaf also?
+		else if (this.left.member(blt)) {
+			return true;
+		} 
+		//If the current key ever matches,
+		//control will flow only to return true
+		return this.right.member(blt);
+	}
+
 }

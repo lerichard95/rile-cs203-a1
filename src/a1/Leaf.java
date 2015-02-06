@@ -5,12 +5,13 @@ public class Leaf implements BST {
 
 	Leaf() {}
 
-//---FUNCTION CONTRACT-----------------------------------------------------
+	//---FUNCTION CONTRACT-----------------------------------------------------
 	// empty() -> FiniteSet
-	// should throw an error because EmptySet shouldn't 
-	// be able to return an empty instance of itself?
-	public FiniteSet empty() {
-		throw new RuntimeException("Cannot return empty of empty");
+	// empty() should return a FiniteSet with "empty" for left, right
+	public Leaf empty() {
+	//Note on constructor: It seems OK to use Leaf() for left/right because 
+	//Leaf implements BST
+			return new Leaf();
 	}
 	
 //---FUNCTION CONTRACT-----------------------------------------------------
@@ -22,9 +23,11 @@ public class Leaf implements BST {
 		return 0;
 	}
 	
-	
-	public boolean emptyhuh() {
+	public boolean isEmptyHuh() {
 		return true;
 	}
 	
+	public boolean member(int blt) {
+		return false;
+	}
 }
