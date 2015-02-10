@@ -29,7 +29,9 @@ public class FiniteSet implements BST {
 	// set.isEmptyHuh() -> boolean
 	// set : BST
 	public boolean isEmptyHuh() {
-		return this.cardinality() == 0;
+		//FiniteSet can never be empty. Leaf is used to represent empty nodes.
+		return false;		
+		//return this.cardinality() == 0;
 	}
 
 	// member(t blt) -> boolean
@@ -54,6 +56,32 @@ public class FiniteSet implements BST {
 		return this.right.member(blt);
 	}
 
+
+	//t.addHelper(a, elt) -> FiniteSet
+	//a: FiniteSet
+	//elt: integer
+	//DESCRIPTION: addHelper traverses the temp tree of add and decides which 
+	//parent node to place the new key under. Returns a FiniteSet with the new 
+	//node added to it. 
+	//Question: How to return the ENTIRE temp node with the new node added??
+	
+	private FiniteSet addHelper(FiniteSet a, FiniteSet prev, int elt) {
+		
+		if (a.right.isEmptyHuh()) {
+				
+		}
+		
+		if (elt > a.left) {
+			addHelper(a.right, a, elt);
+		} 
+		
+		if (elt < a.right) { 
+			addHelper(a.left, a, elt);
+		}
+		
+		
+	}
+
 	// t.add(elt) -> FiniteSet
 	// t : FiniteSet
 	// elt : integer
@@ -65,6 +93,16 @@ public class FiniteSet implements BST {
 			return this;
 		}
 		
+		//Make a copy of the uppermost FiniteSet
+		FiniteSet temp = this;
+		
+		//Abstraction?
+		//Helper function? recursively decide which direction to place new key
+		this.addHelper(temp, elt);
+		
+
+		//OLD CODE: Code "condemned" by Jay :P
+		/*
 		// Once at the lowest level, decide which direction to place new key
 		if (this.cardinality() == 1) {
 			FiniteSet out;
@@ -76,9 +114,8 @@ public class FiniteSet implements BST {
 				// Set right BST to a new FiniteSet holding the key
 				out.right = new FiniteSet(new Leaf(), elt, new Leaf());
 			}
-			
-			
 		}
+		
 
 		// Hold onto a copy of the current input
 		FiniteSet temp = this;
@@ -91,6 +128,7 @@ public class FiniteSet implements BST {
 			this.right.add(elt);
 		}
 
+			*/
 	}
 
 }

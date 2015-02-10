@@ -24,10 +24,31 @@ public class Leaf implements BST {
 	}
 	
 	public boolean isEmptyHuh() {
+		//Leaves are always empty
 		return true;
 	}
 	
 	public boolean member(int blt) {
 		return false;
 	}
+	
+	public FiniteSet add(int elt) {
+		//Return a new FiniteSet with empty left/rights
+		//with the added key elt
+		return new FiniteSet(new Leaf(), elt ,new Leaf());
+	}
+	
+	/*
+	* t.equal(u) -> boolean
+	* t: FiniteSet
+	* u: FiniteSet
+	* DESCRIPTION
+	* Returns true if t and u contains the same elements
+	* 
+	*/
+	public FiniteSet equal(FiniteSet u) {
+		//since all Leafs are empty, if u is empty also, then they are equal 
+		return (u.isEmptyHuh());
+	}
+	
 }
