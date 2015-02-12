@@ -46,7 +46,7 @@ public class Leaf implements BST {
 	* Returns true if t and u contains the same elements
 	* 
 	*/
-	public FiniteSet equal(FiniteSet u) {
+	public boolean equal(FiniteSet u) {
 		//since all Leafs are empty, if u is empty also, then they are equal 
 		return (u.isEmptyHuh());
 	}

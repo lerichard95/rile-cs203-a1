@@ -56,7 +56,7 @@ public interface BST {
 	* Returns true if t and u contains the same elements
 	* 
 	*/
-	public FiniteSet equal(FiniteSet u);
+	public boolean equal(FiniteSet u);
 
 
 	/*

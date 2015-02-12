@@ -15,6 +15,12 @@ public class FiniteSet implements BST {
 		this.key = key;
 		this.right = right;
 	}
+	
+	//toString for testing
+	public String toString(){
+		return "this.left: " + this.left.toString() + ", key:" + this.key + 
+				", this.right" + this.right.toString(); 
+	}
 
 	// FiniteSet should implement all the functions in BST
 
@@ -29,9 +35,9 @@ public class FiniteSet implements BST {
 	// set.isEmptyHuh() -> boolean
 	// set : BST
 	public boolean isEmptyHuh() {
-		//FiniteSet can never be empty. Leaf is used to represent empty nodes.
-		return false;		
-		//return this.cardinality() == 0;
+		// FiniteSet can never be empty. Leaf is used to represent empty nodes.
+		return false;
+		// return this.cardinality() == 0;
 	}
 
 	// member(t blt) -> boolean
@@ -56,79 +62,61 @@ public class FiniteSet implements BST {
 		return this.right.member(blt);
 	}
 
-
-	//t.addHelper(a, elt) -> FiniteSet
-	//a: FiniteSet
-	//elt: integer
-	//DESCRIPTION: addHelper traverses the temp tree of add and decides which 
-	//parent node to place the new key under. Returns a FiniteSet with the new 
-	//node added to it. 
-	//Question: How to return the ENTIRE temp node with the new node added??
-	
-	private FiniteSet addHelper(FiniteSet a, FiniteSet prev, int elt) {
-		
-		if (a.right.isEmptyHuh()) {
-				
-		}
-		
-		if (elt > a.left) {
-			addHelper(a.right, a, elt);
-		} 
-		
-		if (elt < a.right) { 
-			addHelper(a.left, a, elt);
-		}
-		
-		
-	}
-
 	// t.add(elt) -> FiniteSet
 	// t : FiniteSet
 	// elt : integer
-	// Since add is a pure implementation, it needs to return all of t
-	// with elt added to it.
+	//
+	// Not really sure how to do this... should I keep a copy of the entire 
+	// root FiniteSet that holds all the other ones, and then keep copies
+	// of the parent FiniteSets in order to 
+
 	public FiniteSet add(int elt) {
-		// Check if elt is already a member of the FiniteSet
+		// Check if elt is already in the tree/set
 		if (this.member(elt)) {
 			return this;
 		}
-		
-		//Make a copy of the uppermost FiniteSet
-		FiniteSet temp = this;
-		
-		//Abstraction?
-		//Helper function? recursively decide which direction to place new key
-		this.addHelper(temp, elt);
-		
 
-		//OLD CODE: Code "condemned" by Jay :P
-		/*
-		// Once at the lowest level, decide which direction to place new key
-		if (this.cardinality() == 1) {
-			FiniteSet out;
-			out = this;
-			if (elt < this.key) {
-				// Set left BST to a new FiniteSet holding key
-				out.left = new FiniteSet(new Leaf(), elt, new Leaf());
-			} else {
-				// Set right BST to a new FiniteSet holding the key
-				out.right = new FiniteSet(new Leaf(), elt, new Leaf());
-			}
+		// Traverse tree to find the right place to insert the new FiniteSet
+		if (elt > this.key) {
+			return this.right.add(elt);
 		}
-		
-
-		// Hold onto a copy of the current input
-		FiniteSet temp = this;
-
-		// Not at the end yet- continue recursion
-		// Decide if elt should be placed in left or right BST
 		if (elt < this.key) {
-			this.left.add(elt);
-		} else if (elt > this.key) {
-			this.right.add(elt);
+			return this.left.add(elt);
+		}
+		
+		//Just experimenting... 
+		//  Reached lowest level of FiniteSet tree, decide which direction to
+		//  place new FiniteSet— set it to 
+		if (elt > this.key) {
+			this.right = new FiniteSet(new Leaf(), elt, new Leaf());
+		}
+		if (elt < this.key) {
+			this.left = new FiniteSet(new Leaf(), elt, new Leaf());
+		}
+		
+		return new FiniteSet(new Leaf(), elt, new Leaf());
+	}
+
+	public boolean equal(FiniteSet u) {
+		// IDEA:
+		// Check cardinality, if they are not same size, they should not be
+		// the same set.
+		// Loop through all elements of both trees, compare if keys are
+		// equal to each other
+
+		if (this.cardinality() == u.cardinality()) {
+			
+			//Begin looping through all elements
+			
+			//REMOVE THIS:
+			return false;
+			//
+			
+			
+		} else {
+			return false;
 		}
 
-			*/
 	}
 
 }
