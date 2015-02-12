@@ -2,6 +2,23 @@ package a1;
 
 //FiniteSet will implement BST, and all its functions
 public interface BST {
+	
+	/*
+	* t.remove(elt) -> Leaf
+	* t: FiniteSet
+	* elt: int
+	* DESCRIPTION
+	* Returns a Leaf, which represents an empty FiniteSet
+	*/
+	public BST empty();
+	
+	/*
+	* t.remove(elt) -> FiniteSet
+	* t: FiniteSet
+	* elt: int
+	* DESCRIPTION
+	* Returns set containing everything in t except elt
+	*/
 	public int cardinality();
 	public boolean isEmptyHuh();
 	public boolean member(int blt);
@@ -18,8 +35,10 @@ public interface BST {
 	* elt: int
 	* DESCRIPTION
 	* Returns set containing everything in t except elt
-	*
 	*/
+	public FiniteSet remove(int elt);
+	
+	
 	
 	/*
 	* t.union(u) -> FiniteSet
@@ -27,7 +46,6 @@ public interface BST {
 	* u: FiniteSet
 	* DESCRIPTION
 	* Returns a set containing everything in t and u
-	* 
 	*/
 	
 	/*

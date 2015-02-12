@@ -14,7 +14,10 @@ public class Leaf implements BST {
 			return new Leaf();
 	}
 	
-//---FUNCTION CONTRACT-----------------------------------------------------
+	public String toString(){
+		return "Leaf()";
+	}
+	
 	//cardinality() -> int
 	//no inputs— if a Leaf foo,
 	// foo.cardinality() -> int
