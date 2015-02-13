@@ -18,17 +18,16 @@ public class FiniteSet implements BST {
 
 	// toString for testing
 	public String toString() {
-		return "FiniteSet(" + this.left.toString() + ", " + this.key + ", " 
+		return "FiniteSet(" + this.left.toString() + ", " + this.key + ", "
 				+ this.right.toString() + ")";
 	}
 
 	// FiniteSet should implement all the functions in BST
 
-	
-	public BST empty(){
+	public BST empty() {
 		return new Leaf();
 	}
-	
+
 	// set.cardinality() -> int
 	// set : FiniteSet
 	public int cardinality() {
@@ -76,57 +75,86 @@ public class FiniteSet implements BST {
 	// of the parent FiniteSets in order to
 
 	public FiniteSet add(int elt) {
-		//Thanks to Atticus K for a better way to imagine adding "nodes"
-		
+		// Thanks to Atticus K for a better way to imagine adding "nodes"
+
 		// key == elt
 		// Just return the current FiniteSet "node"
 		if (this.key == elt) {
 			return this;
 		}
-		
+
 		// elt < key
-		// Returning a new FiniteSet allows a tree to be "rebuilt" upon 
+		// Returning a new FiniteSet allows a tree to be "rebuilt" upon
 		// successive recursive calls
 		//
 		// The new FiniteSet should hold the current key, preseve the FiniteSet
 		// that will not be modified, and call add() on the respective FiniteSet
 		// that elt should belong to...
-		// 
-		// 
+		//
+		//
 		// When add() reaches a Leaf, the add() implementation for Leaf will
 		// create a FiniteSet that holds elt, with Leaf for left and right.
-		// Since this is the last return, recursion will stop, and the 
-		// new instances of FiniteSet built on successive add() calls will 
+		// Since this is the last return, recursion will stop, and the
+		// new instances of FiniteSet built on successive add() calls will
 		// return a new root FiniteSet, making add() a pure implementation.
-		// 
-		
+		//
+
 		if (elt < this.key) {
 			return new FiniteSet(left.add(elt), key, right);
 		}
-		
+
 		// elt > this.key
 		else {
 			return new FiniteSet(left, key, right.add(elt));
 		}
 	}
 
-	//TODO: figure out remove
-	public FiniteSet remove(int blt) {
-		if (this.key == blt) {
-			
+	// TODO: figure out remove
+	public BST remove(int elt) {
+
+		//  Thanks to Atticus K for this implementation
+		if (elt < this.key) {
+			//  Returning a new FiniteSet allows each recursive call
+			//  to "rebuild" the FiniteSet tree
+			return new FiniteSet(this.left.remove(elt), key, right);
+		} 
+		
+		if (elt > this.key) {
+			return new FiniteSet(left, key, this.right.remove(elt));
 		}
+
+		else {
+			//  Combine the left and right trees but ignore the current key  
+			return this.left.union(this.right);
+		}
+
 	}
-	
+
+
+
+	public BST union(BST u) {
+		//  Thanks to Nicholas B for explaining the recursive nature of this
+		return u.union(this.left).union(this.right).add(key);
+		//  What happens:
+		//  Recursive call union of "this" to u,
+		//  union will "travel" down the left FiniteSet of the root FiniteSet
+		//  When each union call reaches the base case (a Leaf), it will return
+		//  FiniteSet u, and then call union of that onto the right tree,
+		//  Finally, the key will be added to the FiniteSet containing
+		//  the left and right trees.
+	}
+
 	public boolean equal(FiniteSet u) {
 		// IDEA:
 		// Check cardinality, if they are not same size, they should not be
 		// the same set.
-		// Loop through all elements of both trees, compare if keys are
-		// equal to each other
+		// Traverse elements 
 
 		if (this.cardinality() == u.cardinality()) {
 
-			// Begin looping through all elements
+			//TODO:
+			// Begin recursively going through all elements
+			return (this.key == u.key);
 
 			// REMOVE THIS:
 			return false;
@@ -137,5 +165,4 @@ public class FiniteSet implements BST {
 		}
 
 	}
-
 }

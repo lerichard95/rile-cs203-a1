@@ -54,4 +54,18 @@ public class Leaf implements BST {
 		return (u.isEmptyHuh());
 	}
 	
+	// What do you remove from a Leaf? Just return Leaf because you can't 
+	// remove elements from empty set
+	public BST remove(int elt) {
+		return new Leaf();
+	}
+	
+	//Thanks to Atticus K for this
+	//And Nicholas B for explaining how this works
+	public BST union(BST u) {
+		return u;
+	}
+	
+	
+	
 }

@@ -30,13 +30,13 @@ public interface BST {
 	public FiniteSet add(int elt);
 	
 	/*
-	* t.remove(elt) -> FiniteSet
+	* t.remove(elt) -> BST
 	* t: FiniteSet
 	* elt: int
 	* DESCRIPTION
 	* Returns set containing everything in t except elt
 	*/
-	public FiniteSet remove(int elt);
+	public BST remove(int elt);
 	
 	
 	
@@ -47,6 +47,7 @@ public interface BST {
 	* DESCRIPTION
 	* Returns a set containing everything in t and u
 	*/
+	public BST union(BST u);
 	
 	/*
 	* t.inter(u) -> FiniteSet
@@ -56,6 +57,8 @@ public interface BST {
 	* Returns a set containing everything that is both in t and u
 	* 
 	*/
+	
+	
 	
 	/*
 	* t.diff(u) -> FiniteSet
