@@ -66,6 +66,9 @@ public class Leaf implements BST {
 		return u;
 	}
 	
+	public BST inter(BST u) {
+		return new Leaf();
+	}
 	
 	
 }

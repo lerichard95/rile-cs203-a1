@@ -112,57 +112,63 @@ public class FiniteSet implements BST {
 	// TODO: figure out remove
 	public BST remove(int elt) {
 
-		//  Thanks to Atticus K for this implementation
+		// Thanks to Atticus K for this implementation
 		if (elt < this.key) {
-			//  Returning a new FiniteSet allows each recursive call
-			//  to "rebuild" the FiniteSet tree
+			// Returning a new FiniteSet allows each recursive call
+			// to "rebuild" the FiniteSet tree
 			return new FiniteSet(this.left.remove(elt), key, right);
-		} 
-		
+		}
+
 		if (elt > this.key) {
 			return new FiniteSet(left, key, this.right.remove(elt));
 		}
 
 		else {
-			//  Combine the left and right trees but ignore the current key  
+			// Combine the left and right trees but ignore the current key
 			return this.left.union(this.right);
 		}
 
 	}
 
-
-
 	public BST union(BST u) {
-		//  Thanks to Nicholas B for explaining the recursive nature of this
+		// Thanks to Nicholas B for explaining the recursive nature of this
 		return u.union(this.left).union(this.right).add(key);
-		//  What happens:
-		//  Recursive call union of "this" to u,
-		//  union will "travel" down the left FiniteSet of the root FiniteSet
-		//  When each union call reaches the base case (a Leaf), it will return
-		//  FiniteSet u, and then call union of that onto the right tree,
-		//  Finally, the key will be added to the FiniteSet containing
-		//  the left and right trees.
+		// What happens:
+		// Recursive call union of "this" to u,
+		// union will "travel" down the left FiniteSet of the root FiniteSet
+		// When each union call reaches the base case (a Leaf), it will return
+		// FiniteSet u, and then call union of that onto the right tree,
+		// Finally, the key will be added to the FiniteSet containing
+		// the left and right trees.
 	}
 
+	// TODO finish equal
 	public boolean equal(FiniteSet u) {
 		// IDEA:
 		// Check cardinality, if they are not same size, they should not be
 		// the same set.
-		// Traverse elements 
+		// Traverse elements
 
 		if (this.cardinality() == u.cardinality()) {
 
-			//TODO:
+			// TODO:
 			// Begin recursively going through all elements
 			return (this.key == u.key);
-
-			// REMOVE THIS:
-			return false;
-			//
 
 		} else {
 			return false;
 		}
 
 	}
+
+	//Thanks to Atticus K for implementation
+	public BST inter(BST u) {
+		if (u.member(this.key)) {
+			return new FiniteSet(this.left.inter(u), this.key,
+					this.right.inter(u));
+		} else {
+			return this.left.union(this.right).inter(u);
+		}
+	}
+
 }

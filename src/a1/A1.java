@@ -4,13 +4,11 @@ public class A1 {
 	public static void main(String[] args) {
 
 		// Tests
-		boolean testsEnabled = false;
+		boolean testsEnabled = true;
 
 		if (testsEnabled) {
-	
-			
+
 			// A BST for testing
-			// Is it better to have BST t1 or FiniteSet t1??
 			BST leaf = new Leaf();
 			BST t1 = new FiniteSet(leaf, 1, leaf);
 			BST t3 = new FiniteSet(leaf, 3, leaf);
@@ -20,9 +18,9 @@ public class A1 {
 			BST t6 = new FiniteSet(t5, 6, t7);
 			BST t4 = new FiniteSet(t2, 4, t6);
 
-			//Test: empty()
+			// Test: empty()
 			System.out.println(leaf.empty());
-			
+
 			System.out.println("-------- Test: cardinality() --------");
 			Leaf leafasdf = new Leaf();
 			System.out.println("leafasdf.cardinality() -> "
@@ -86,50 +84,84 @@ public class A1 {
 					+ " It should be: " + "true");
 			System.out.println("t4.member(8) -> " + t4.member(8)
 					+ " It should be: " + "false");
+
+			// Testing add()
+			System.out.println("-----------  Testing add()  -----------");
+
+			// Adding existing elements to FiniteSet
+			// All of these should be identical
+			System.out
+					.println("-------  Testing add() existing elements -------");
+			System.out.println(t4.add(4));
+			System.out.println(t4.add(1));
+			System.out.println(t4.add(2));
+			System.out.println(t4.add(3));
+			System.out.println(t4.add(5));
+			System.out.println(t4.add(6));
+			System.out.println(t4.add(7));
+
+			System.out
+					.println("-----  End testing add() existing elements -----");
+
+			// Test: Implementation is pure
+			// Second prints should not return a FiniteSet with the element
+			// added in line above...
+
+			// Adding 0 and 8
+			System.out.println(t4.add(0).add(8));
+			System.out.println(t4);
+
+			System.out.println(t4.add(9));
+			System.out.println(t4.add(0).add(8));
+
+			System.out.println("----- Adding larger numbers Y, "
+					+ "then adding numbers in between largest number in "
+					+ "initial set X -----");
+
+			System.out.println(t4.add(10).add(8));
+			System.out.println(t4.add(15).add(9).add(8));
+
+			// MORE TESTING: remove
+			System.out.println("----- TEST: remove (1) -----");
+
+			// remove test 1: make an exhaustive tree and remove
+			// everything from it
+			TreeGen treeGen = new TreeGen();
+			BST exhaustTree = treeGen.exhaustTree(11);
+
+			System.out.println("Initial exhaustTree:");
+			System.out.println(exhaustTree);
+
+			System.out.println("Begin removing");
+			for (int i = 1; i <= 10; i++) {
+				exhaustTree = exhaustTree.remove(i);
+				System.out.println(exhaustTree);
+
+			}
+
+			// remove test 2: remove items from an empty set
+			System.out.println("----- TEST: remove (2) -----");
+			BST testLeaf = new Leaf();
+			System.out.println("Initial Leaf:");
+			System.out.println(testLeaf);
+			System.out.println("Start testLeaf.remove() calls:");
+			for (int i = 1; i <= 10; i++) {
+				testLeaf = testLeaf.remove(i);
+				System.out.println(testLeaf);
+			}
+
+			System.out.println("----- TEST: union (1) -----");
+			// Union of empty set and non-empty set
+			// Should return the non-empty set
+			BST testLeaf2 = new Leaf();
+			BST exhaustTree2 = treeGen.exhaustTree(11);
+
+			System.out.println(testLeaf2.union(exhaustTree2));
 		}
 		
-		//Testing add()
-		System.out.println("-----------  Testing add()  -----------");
-		BST leaf = new Leaf();
-		BST t1 = new FiniteSet(leaf, 1, leaf);
-		BST t3 = new FiniteSet(leaf, 3, leaf);
-		BST t5 = new FiniteSet(leaf, 5, leaf);
-		BST t7 = new FiniteSet(leaf, 7, leaf);
-		BST t2 = new FiniteSet(t1, 2, t3);
-		BST t6 = new FiniteSet(t5, 6, t7);
-		BST t4 = new FiniteSet(t2, 4, t6);
-				
-		//  Adding existing elements to FiniteSet
-		//  All of these should be identical 
-		System.out.println("-------  Testing add() existing elements -------");
-		System.out.println(t4.add(4));
-		System.out.println(t4.add(1));
-		System.out.println(t4.add(2));
-		System.out.println(t4.add(3));
-		System.out.println(t4.add(5));
-		System.out.println(t4.add(6));
-		System.out.println(t4.add(7));
 		
-		System.out.println("-----  End testing add() existing elements -----");		
-		
-		//  Test: Implementation is pure   
-		//  Second prints should not return a FiniteSet with the element 
-		//  added in line above...
 
-		//Adding 0 and 8
-		System.out.println(t4.add(0).add(8));
-		System.out.println(t4);
-		
-		System.out.println(t4.add(9));
-		System.out.println(t4.add(0).add(8));
-		
-		System.out.println("----- Adding larger numbers Y, "
-				+ "then adding numbers in between largest number in "
-				+ "initial set X -----"); 
-		
-		System.out.println(t4.add(10).add(8));
-		System.out.println(t4.add(15).add(9).add(8));
-		
-		
+		// end of main
 	}
+
 }

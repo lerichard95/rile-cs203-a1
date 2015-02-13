@@ -58,7 +58,7 @@ public interface BST {
 	* 
 	*/
 	
-	
+	public BST inter(BST u);
 	
 	/*
 	* t.diff(u) -> FiniteSet
