@@ -70,5 +70,19 @@ public class Leaf implements BST {
 		return new Leaf();
 	}
 	
+	public BST diff(BST u) {
+		return u;
+	}
 	
+	public boolean subset(BST u) {
+		//  leaf.subset(u) means is leaf a subset of u
+		//The empty set is a subset of any set so return true
+		return true;
+	}
+	
+	public boolean equal(BST u) {
+		//if u is empty, then it is equal to the empty set
+		return u.isEmptyHuh();
+	}
+	 
 }

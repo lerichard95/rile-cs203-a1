@@ -65,9 +65,11 @@ public interface BST {
 	* t: FiniteSet
 	* u: FiniteSet
 	* DESCRIPTION
-	* Returns a set containing everythign in u EXCEPT items in t
+	* Returns a set containing everything in u EXCEPT items in t
 	* 
 	*/
+	
+	public BST diff(BST u);
 		
 	/*
 	* t.equal(u) -> boolean
@@ -88,5 +90,7 @@ public interface BST {
 	* Returns true if t is a subset of u
 	* 
 	*/
+	
+	public boolean subset(BST u);
 	
 }

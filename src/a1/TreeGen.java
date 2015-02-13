@@ -19,10 +19,10 @@ public class TreeGen {
 		return tree;
 	}
 
-	public BST exhaustTree(int no) {
+	public BST exhaustTree(int start, int end) {
 		tree = new Leaf();
 
-		for (int i = 1; i < no; i++) {
+		for (int i = start; i <= end; i++) {
 			tree = tree.add(i);
 		}
 		return tree;

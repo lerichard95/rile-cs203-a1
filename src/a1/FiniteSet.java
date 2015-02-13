@@ -143,32 +143,74 @@ public class FiniteSet implements BST {
 	}
 
 	// TODO finish equal
+	/*
 	public boolean equal(FiniteSet u) {
 		// IDEA:
 		// Check cardinality, if they are not same size, they should not be
 		// the same set.
-		// Traverse elements
 
 		if (this.cardinality() == u.cardinality()) {
 
 			// TODO:
 			// Begin recursively going through all elements
-			return (this.key == u.key);
+			return ((this.left.equal(u))
+					&&
+					(this.right.equal(u)));
 
 		} else {
 			return false;
 		}
 
 	}
+	*/
 
 	//Thanks to Atticus K for implementation
 	public BST inter(BST u) {
 		if (u.member(this.key)) {
+			//  If the current FiniteSet fulfills being in 
+			//  u, return a new FiniteSet that calls the intersection of u
+			//  with the intersection of the left child, as well as the inter
+			//  -section of the right child and u. 
+			//  (Recursively call inter on left and right children)
+			//  Preserve current key
+			
 			return new FiniteSet(this.left.inter(u), this.key,
 					this.right.inter(u));
-		} else {
+		} 
+		//  else case: current key is not a member of u,
+		//  return the union of the left child with right child,
+		//  and intersect that with u—
+		//  Union the left and right children, 
+		//  Use that set to compare with u again
+		else {
 			return this.left.union(this.right).inter(u);
 		}
 	}
+	
+	//Thanks to Atticus K for implementation
+	public BST diff(BST u) {
+		//  start by unioning the left/right children,
+		//  then recursive call diff with a new input 
+		//  remove the current key from u— if there is not overlap between sets,
+		//  remove() will return the same set u
+		
+		return this.left.union(this.right).diff(u.remove(this.key));
+	}
+	
+	
+	//  Thanks to Atticus K for implementation of subset and equal
+	public boolean subset(BST u) {
+		//  Checks if current key is a member of u,
+		//  Then recursively calls subset on left/right branches 
+		return u.member(this.key) && this.left.subset(u) && this.right.subset(u);
+	}
+	
+	 public boolean equal(BST u) {
+		 //  By definition of subset, 
+		 //  sets this and u are equivalent if 
+		 //  this and u are subsets of each other. 
+		 return this.subset(u) && u.subset(this);
+	 }
+	
 
 }
