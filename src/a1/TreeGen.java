@@ -9,6 +9,8 @@ public class TreeGen {
 	public TreeGen() {
 	}
 
+	//  Thanks to Nicholas Burka for acknowedging the importance of setting
+	//  tree to accomodate for lack of mutation
 	public BST randTree(int num, int range) {
 		tree = new Leaf();
 
